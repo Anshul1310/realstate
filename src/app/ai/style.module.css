@@ -1,6 +1,6 @@
 .page {
   background-color: #f0f2f5;
-  min-height: calc(100vh - 80px); /* Height minus navbar */
+  min-height: calc(100vh - 80px);
   padding: 40px;
 }
 
@@ -13,7 +13,6 @@
   height: 80vh;
 }
 
-/* Sidebar Stats */
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -53,7 +52,6 @@
   color: #00aa6c;
 }
 
-/* Chat Section */
 .chatSection {
   background: white;
   border-radius: 24px;
@@ -109,7 +107,6 @@
   border-bottom-right-radius: 4px;
 }
 
-/* Input Area */
 .inputArea {
   padding: 20px;
   border-top: 1px solid #eee;
@@ -146,4 +143,65 @@
 
 .sendBtn:hover {
   transform: scale(1.05);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 900px) {
+  .page {
+    padding: 20px;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .chatSection {
+    height: 60vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Add these to the end of src/app/ai/style.module.css */
+
+@media (max-width: 900px) {
+  .page {
+    padding: 20px;
+  }
+
+  .container {
+    grid-template-columns: 1fr; /* Sidebar stacks on top of chat */
+    height: auto; /* Allow content to dictate height */
+  }
+
+  .sidebar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+  }
+
+  .chatSection {
+    height: 60vh; /* Fixed height for chat on mobile */
+  }
+
+  .messageAI, .messageUser {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    grid-template-columns: 1fr; /* Single column stats on very small phones */
+  }
 }

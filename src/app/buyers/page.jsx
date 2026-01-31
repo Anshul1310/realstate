@@ -1,38 +1,65 @@
+'use client';
+
 import React from 'react';
-import Navbar from './../components/Navbar';
 import styles from './style.module.css';
+import { motion } from 'framer-motion';
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
+};
 
 const Buyers = () => {
   return (
     <div className={styles.page}>
-      
       <main className={styles.main}>
-        <header className={styles.hero}>
+        <motion.header 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={styles.hero}
+        >
           <h1>Find your dream home with AI.</h1>
           <p>We analyze market trends to get you the best price.</p>
-          
           <div className={styles.searchBar}>
-            <input type="text" placeholder="Search by city, neighborhood, or zip" />
+            <input type="text" placeholder="Search by city..." />
             <button className={styles.searchBtn}>Search</button>
           </div>
-        </header>
+        </motion.header>
 
-        <section className={styles.grid}>
-          {/* Mock Data Cards */}
+        <motion.section 
+          className={styles.grid}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {[1, 2, 3, 4, 5, 6].map((item) => (
-            <div key={item} className={styles.card}>
+            <motion.div 
+              key={item} 
+              variants={cardVariants}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              className={styles.card}
+            >
               <div className={styles.imagePlaceholder}></div>
               <div className={styles.cardContent}>
-                <div className={styles.cardHeader}>
-                  <h3>Modern Loft in Downtown</h3>
-                  <span className={styles.rating}>★ 4.9</span>
-                </div>
-                <p className={styles.desc}>2 beds • 850 sqft • AI Value: Great Deal</p>
+                <h3>Modern Loft in Downtown</h3>
                 <p className={styles.price}>$450,000</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </section>
+        </motion.section>
       </main>
     </div>
   );
