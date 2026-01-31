@@ -1,0 +1,80 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95); /* Slight transparency for modern feel */
+  backdrop-filter: blur(10px); /* Blurs content behind the navbar */
+  border-bottom: 1px solid #eaeaea;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.5px;
+}
+
+.logoIcon {
+  color: var(--primary);
+}
+
+.links {
+  display: flex;
+  gap: 16px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 10px 20px;
+  border-radius: 50px; /* Full pill shape */
+  transition: all 0.2s ease;
+}
+
+.link:hover {
+  background-color: var(--bg-secondary);
+}
+
+/* The active state styles (matches the logic in Navbar.jsx) */
+.active {
+  background-color: var(--text-dark);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.active:hover {
+  background-color: black; /* Keep it dark on hover if active */
+  transform: translateY(-1px);
+}
+
+/* Responsive adjustment for mobile screens */
+@media (max-width: 768px) {
+  .links span {
+    display: none; /* Hide text on small screens, show icons only */
+  }
+  
+  .link {
+    padding: 12px; /* Square/Circle shape for icons */
+  }
+}

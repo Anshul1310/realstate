@@ -1,0 +1,116 @@
+.page {
+  min-height: 100vh;
+  background-color: var(--bg-light);
+}
+
+.main {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: var(--text-gray);
+  margin-bottom: 32px;
+}
+
+/* Professional Search Bar */
+.searchBar {
+  display: inline-flex;
+  background: white;
+  padding: 8px;
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+  border: 1px solid #dddddd;
+  width: 100%;
+  max-width: 600px;
+}
+
+.searchBar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0 24px;
+  font-size: 1rem;
+  border-radius: 50px;
+}
+
+.searchBtn {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.searchBtn:active {
+  transform: scale(0.96);
+}
+
+/* Airbnb-style Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  aspect-ratio: 1 / 0.95; /* Airbnb nearly square ratio */
+  background-color: #e0e0e0;
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.cardHeader h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.desc {
+  color: var(--text-gray);
+  font-size: 0.95rem;
+}
+
+.price {
+  margin-top: 4px;
+  font-weight: 600;
+  color: var(--text-dark);
+}

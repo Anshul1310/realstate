@@ -1,66 +1,48 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Link from 'next/link';
+import styles from './page.module.css';
+import { Search, DollarSign, Cpu, ArrowRight } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className={styles.main}>
+      <section className={styles.hero}>
+        <h1 className={styles.title}>The Future of Real Estate is Here.</h1>
+        <p className={styles.subtitle}>
+          Buy, sell, and analyze properties with the power of artificial intelligence.
+        </p>
+        
+        <div className={styles.cardContainer}>
+          {/* Card 1: Buyers */}
+          <Link href="/buyers" className={styles.card}>
+            <div className={styles.iconBox} style={{ background: '#e6f0ff', color: '#0066ff' }}>
+              <Search size={32} />
+            </div>
+            <h2>For Buyers</h2>
+            <p>Find undervalued homes and hidden gems before anyone else.</p>
+            <span className={styles.linkText}>Start Searching <ArrowRight size={16} /></span>
+          </Link>
+
+          {/* Card 2: Sellers */}
+          <Link href="/sellers" className={styles.card}>
+            <div className={styles.iconBox} style={{ background: '#fff0f3', color: '#ff385c' }}>
+              <DollarSign size={32} />
+            </div>
+            <h2>For Sellers</h2>
+            <p>Get an instant AI valuation and sell at the market peak.</p>
+            <span className={styles.linkText}>Get Valuation <ArrowRight size={16} /></span>
+          </Link>
+
+          {/* Card 3: AI */}
+          <Link href="/ai" className={styles.card}>
+            <div className={styles.iconBox} style={{ background: '#f3e6ff', color: '#8844ff' }}>
+              <Cpu size={32} />
+            </div>
+            <h2>AI Insights</h2>
+            <p>Deep market analysis, price predictions, and investment scores.</p>
+            <span className={styles.linkText}>Explore Data <ArrowRight size={16} /></span>
+          </Link>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
