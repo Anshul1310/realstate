@@ -2,8 +2,8 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.95); /* Slight transparency for modern feel */
-  backdrop-filter: blur(10px); /* Blurs content behind the navbar */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid #eaeaea;
   height: 80px;
   display: flex;
@@ -48,7 +48,7 @@
   font-weight: 500;
   font-size: 0.95rem;
   padding: 10px 20px;
-  border-radius: 50px; /* Full pill shape */
+  border-radius: 50px;
   transition: all 0.2s ease;
 }
 
@@ -56,7 +56,6 @@
   background-color: var(--bg-secondary);
 }
 
-/* The active state styles (matches the logic in Navbar.jsx) */
 .active {
   background-color: var(--text-dark);
   color: white;
@@ -64,55 +63,43 @@
 }
 
 .active:hover {
-  background-color: black; /* Keep it dark on hover if active */
+  background-color: black;
   transform: translateY(-1px);
 }
 
-/* Responsive adjustment for mobile screens */
+/* --- Responsive Updates --- */
+
 @media (max-width: 768px) {
-  .links span {
-    display: none; /* Hide text on small screens, show icons only */
+  .nav {
+    height: 70px; /* Slimmer navbar on tablets/mobile */
   }
-  
+
+  .container {
+    width: 95%; /* Use more horizontal space */
+  }
+
+  /* Hide the text labels for the navigation links to save space */
+  .linkText {
+    display: none;
+  }
+
   .link {
-    padding: 12px; /* Square/Circle shape for icons */
+    padding: 12px; /* Make links look like square/circular icon buttons */
+    border-radius: 12px;
+  }
+
+  .links {
+    gap: 8px; /* Reduce spacing between icons */
   }
 }
 
-/* Existing .nav and .container styles remain the same */
+@media (max-width: 480px) {
+  /* Hide "EstateAI" text on very small phones so only the Home icon remains */
+  .logoText {
+    display: none;
+  }
 
-.link {
-  position: relative; /* Essential for the absolute pill */
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: var(--text-dark);
-  font-weight: 500;
-  font-size: 0.95rem;
-  padding: 10px 20px;
-  transition: color 0.3s ease;
-}
-
-.linkContent {
-  position: relative;
-  z-index: 2; /* Sits above the pill */
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.activePill {
-  position: absolute;
-  inset: 0;
-  background-color: var(--text-dark);
-  border-radius: 50px;
-  z-index: 1;
-}
-
-.activeText {
-  color: white !important;
-}
-
-.link:hover:not(.activeText) {
-  opacity: 0.7;
+  .container {
+    justify-content: space-around; /* Distribute icons evenly across the bar */
+  }
 }

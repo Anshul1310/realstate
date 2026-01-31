@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
 import { Home, Search, DollarSign, Cpu } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -19,39 +18,21 @@ const Navbar = () => {
     <nav className={styles.nav}>
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
-          <motion.div 
-            whileHover={{ rotate: 15, scale: 1.1 }} 
-            whileTap={{ scale: 0.9 }}
-          >
-            <Home className={styles.logoIcon} />
-          </motion.div>
-          <span>EstateAI</span>
+          <Home className={styles.logoIcon} />
+          <span className={styles.logoText}>EstateAI</span>
         </Link>
 
         <div className={styles.links}>
-          {navItems.map((item) => {
-            const isActive = pathname === item.path;
-            return (
-              <Link
-                key={item.name}
-                href={item.path}
-                className={`${styles.link} ${isActive ? styles.activeText : ''}`}
-              >
-                {/* The animated background pill */}
-                {isActive && (
-                  <motion.div
-                    layoutId="nav-pill"
-                    className={styles.activePill}
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                <span className={styles.linkContent}>
-                  {item.icon}
-                  <span>{item.name}</span>
-                </span>
-              </Link>
-            );
-          })}
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              href={item.path}
+              className={`${styles.link} ${pathname === item.path ? styles.active : ''}`}
+            >
+              {item.icon}
+              <span className={styles.linkText}>{item.name}</span>
+            </Link>
+          ))}
         </div>
       </div>
     </nav>
