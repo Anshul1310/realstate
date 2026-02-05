@@ -1,6 +1,7 @@
 .page {
   min-height: 100vh;
-  background-color: var(--bg-light);
+  background-color: var(--bg-main);
+  transition: background-color 0.3s ease;
 }
 
 .main {
@@ -19,6 +20,7 @@
   font-weight: 800;
   margin-bottom: 16px;
   letter-spacing: -1px;
+  color: var(--text-dark);
 }
 
 .hero p {
@@ -29,17 +31,19 @@
 
 .searchBar {
   display: inline-flex;
-  background: white;
+  background: var(--bg-card);
   padding: 8px;
   border-radius: 50px;
   box-shadow: var(--shadow);
-  border: 1px solid #dddddd;
+  border: 1px solid var(--border-color);
   width: 100%;
   max-width: 600px;
 }
 
 .searchBar input {
   flex: 1;
+  background: transparent;
+  color: var(--text-dark);
   border: none;
   outline: none;
   padding: 0 24px;
@@ -78,7 +82,7 @@
 .imagePlaceholder {
   width: 100%;
   aspect-ratio: 1 / 0.95;
-  background-color: #e0e0e0;
+  background-color: var(--bg-secondary);
   border-radius: var(--radius);
   margin-bottom: 12px;
   position: relative;
@@ -90,21 +94,10 @@
   gap: 4px;
 }
 
-.cardHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
 .cardHeader h3 {
   font-size: 1rem;
   font-weight: 600;
   color: var(--text-dark);
-}
-
-.desc {
-  color: var(--text-gray);
-  font-size: 0.95rem;
 }
 
 .price {
@@ -116,39 +109,11 @@
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .hero h1 {
-    font-size: 2rem;
-  }
-
-  .searchBar {
-    flex-direction: column;
-    border-radius: 20px;
-    padding: 12px;
-    gap: 12px;
-  }
-
-  .searchBar input {
-    padding: 12px;
-    text-align: center;
-  }
-
-  .searchBtn {
-    width: 100%;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Add these to the end of src/app/buyers/style.module.css */
-
-@media (max-width: 768px) {
-  .hero h1 {
     font-size: 2.2rem;
   }
 
   .searchBar {
-    flex-direction: column; /* Stack input and button */
+    flex-direction: column;
     border-radius: 20px;
     gap: 10px;
     padding: 12px;
@@ -164,7 +129,7 @@
   }
 
   .grid {
-    grid-template-columns: 1fr; /* Single column properties */
+    grid-template-columns: 1fr;
     gap: 30px;
   }
 }

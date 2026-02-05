@@ -2,12 +2,14 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #eaeaea;
+  /* Updated to use the new header variable */
+  background: var(--bg-header); 
+  border-bottom: 1px solid var(--border-color);
   height: 80px;
   display: flex;
   align-items: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  backdrop-filter: blur(10px); /* Optional: Adds a glass effect if transparency is used */
 }
 
 .container {
@@ -36,6 +38,7 @@
 
 .links {
   display: flex;
+  align-items: center;
   gap: 16px;
 }
 
@@ -58,48 +61,66 @@
 
 .active {
   background-color: var(--text-dark);
-  color: white;
+  /* Updated to use --bg-main so text contrasts correctly in both modes */
+  color: var(--bg-main); 
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .active:hover {
-  background-color: black;
+  opacity: 0.9;
   transform: translateY(-1px);
+}
+
+/* Theme Toggle Button */
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-dark);
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.themeToggle:hover {
+  background-color: var(--bg-secondary);
+  transform: rotate(15deg);
 }
 
 /* --- Responsive Updates --- */
 
 @media (max-width: 768px) {
   .nav {
-    height: 70px; /* Slimmer navbar on tablets/mobile */
+    height: 70px; 
   }
 
   .container {
-    width: 95%; /* Use more horizontal space */
+    width: 95%; 
   }
 
-  /* Hide the text labels for the navigation links to save space */
   .linkText {
     display: none;
   }
 
   .link {
-    padding: 12px; /* Make links look like square/circular icon buttons */
+    padding: 12px; 
     border-radius: 12px;
   }
 
   .links {
-    gap: 8px; /* Reduce spacing between icons */
+    gap: 8px; 
   }
 }
 
 @media (max-width: 480px) {
-  /* Hide "EstateAI" text on very small phones so only the Home icon remains */
   .logoText {
     display: none;
   }
 
   .container {
-    justify-content: space-around; /* Distribute icons evenly across the bar */
+    justify-content: space-around; 
   }
 }

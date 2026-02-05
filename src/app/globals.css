@@ -1,11 +1,61 @@
 :root {
+  /* --- Light Theme Defaults --- */
   --primary: #ff385c;
   --text-dark: #222222;
   --text-gray: #717171;
-  --bg-light: #ffffff;
+  
+  /* Backgrounds */
+  --bg-main: #ffffff;
   --bg-secondary: #f7f7f7;
+  --bg-card: #ffffff;
+  --bg-header: #fafafa;
+  --bg-input: #ffffff;
+  
+  /* Borders & Shadows */
+  --border-color: #eaeaea;
   --radius: 12px;
   --shadow: 0 6px 16px rgba(0,0,0,0.12);
+  
+  /* Gradients */
+  --gradient-home: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
+  --gradient-title: linear-gradient(90deg, #222 0%, #555 100%);
+
+  /* Accent Colors (for Icon Boxes) */
+  --accent-blue-bg: #e6f0ff;
+  --accent-blue-text: #0066ff;
+  --accent-red-bg: #fff0f3;
+  --accent-red-text: #ff385c;
+  --accent-purple-bg: #f3e6ff;
+  --accent-purple-text: #8844ff;
+}
+
+[data-theme='dark'] {
+  /* --- Dark Theme Overrides --- */
+  --text-dark: #f0f0f0;
+  --text-gray: #a0a0a0;
+  
+  /* Backgrounds */
+  --bg-main: #121212;
+  --bg-secondary: #1a1a1a;
+  --bg-card: #1e1e1e;
+  --bg-header: #252525;
+  --bg-input: #2a2a2a;
+  
+  /* Borders & Shadows */
+  --border-color: #333333;
+  --shadow: 0 6px 16px rgba(0,0,0,0.5);
+
+  /* Gradients */
+  --gradient-home: linear-gradient(180deg, #121212 0%, #1a1a1a 100%);
+  --gradient-title: linear-gradient(90deg, #ffffff 0%, #cccccc 100%);
+
+  /* Accent Colors (Dark Mode Adjustments) */
+  --accent-blue-bg: rgba(0, 102, 255, 0.15);
+  --accent-blue-text: #66b2ff;
+  --accent-red-bg: rgba(255, 56, 92, 0.15);
+  --accent-red-text: #ff8095;
+  --accent-purple-bg: rgba(136, 68, 255, 0.15);
+  --accent-purple-text: #bb88ff;
 }
 
 * {
@@ -15,6 +65,7 @@
 }
 
 body {
-  background-color: var(--bg-light);
+  background-color: var(--bg-main);
   color: var(--text-dark);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

@@ -1,22 +1,18 @@
-"use client"; // Required for Framer Motion animations
+"use client"; 
 
 import Link from 'next/link';
 import styles from './page.module.css';
 import { Search, DollarSign, Cpu, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-// Animation variants for the container to stagger children
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.2, // Delay between each card's animation
-    },
+    transition: { staggerChildren: 0.2 },
   },
 };
 
-// Animation variants for individual items (Title, Subtitle, Cards)
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { 
@@ -47,7 +43,7 @@ export default function Home() {
             {/* Card 1: Buyers */}
             <motion.div variants={itemVariants}>
               <Link href="/buyers" className={styles.card}>
-                <div className={styles.iconBox} style={{ background: '#e6f0ff', color: '#0066ff' }}>
+                <div className={`${styles.iconBox} ${styles.iconBoxBlue}`}>
                   <Search size={32} />
                 </div>
                 <h2>For Buyers</h2>
@@ -59,7 +55,7 @@ export default function Home() {
             {/* Card 2: Sellers */}
             <motion.div variants={itemVariants}>
               <Link href="/sellers" className={styles.card}>
-                <div className={styles.iconBox} style={{ background: '#fff0f3', color: '#ff385c' }}>
+                <div className={`${styles.iconBox} ${styles.iconBoxRed}`}>
                   <DollarSign size={32} />
                 </div>
                 <h2>For Sellers</h2>
@@ -71,7 +67,7 @@ export default function Home() {
             {/* Card 3: AI */}
             <motion.div variants={itemVariants}>
               <Link href="/ai" className={styles.card}>
-                <div className={styles.iconBox} style={{ background: '#f3e6ff', color: '#8844ff' }}>
+                <div className={`${styles.iconBox} ${styles.iconBoxPurple}`}>
                   <Cpu size={32} />
                 </div>
                 <h2>AI Insights</h2>

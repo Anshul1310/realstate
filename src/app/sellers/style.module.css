@@ -19,6 +19,7 @@
   font-size: 3rem;
   line-height: 1.1;
   margin-bottom: 20px;
+  color: var(--text-dark);
 }
 
 .left p {
@@ -37,7 +38,9 @@
   flex: 1;
   padding: 16px 20px;
   border-radius: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
+  background: var(--bg-input);
+  color: var(--text-dark);
   font-size: 1rem;
   outline: none;
 }
@@ -48,7 +51,7 @@
 
 .inputGroup button {
   background: var(--text-dark);
-  color: white;
+  color: var(--bg-main); /* Invert text color for button */
   border: none;
   padding: 0 30px;
   border-radius: 12px;
@@ -67,10 +70,11 @@
   align-items: center;
   gap: 10px;
   font-weight: 500;
+  color: var(--text-dark);
 }
 
 .mockCard {
-  background: white;
+  background: var(--bg-card);
   padding: 40px;
   border-radius: 24px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.1);
@@ -106,8 +110,12 @@
   border-radius: 8px 8px 0 0;
 }
 
-.bar { background: #eee; }
+.bar { background: var(--bg-secondary); }
 .barActive { background: var(--text-dark); }
+
+.mockLabel {
+  color: var(--text-dark);
+}
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
@@ -117,41 +125,6 @@
 
   .splitLayout {
     grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .left h1 {
-    font-size: 2.2rem;
-    text-align: center;
-  }
-
-  .left p {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-
-  .inputGroup {
-    flex-direction: column;
-  }
-
-  .inputGroup button {
-    padding: 16px;
-  }
-
-  .mockPrice {
-    font-size: 2.8rem;
-  }
-}
-
-/* Add these to the end of src/app/sellers/style.module.css */
-
-@media (max-width: 768px) {
-  .container {
-    padding: 40px 20px;
-  }
-
-  .splitLayout {
-    grid-template-columns: 1fr; /* Stack content and visual card */
     gap: 40px;
   }
 
@@ -172,7 +145,7 @@
   }
 
   .feat {
-    justify-content: center; /* Center features on mobile */
+    justify-content: center;
   }
 
   .mockPrice {

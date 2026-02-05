@@ -1,7 +1,8 @@
 .page {
-  background-color: #f0f2f5;
+  background-color: var(--bg-secondary);
   min-height: calc(100vh - 80px);
   padding: 40px;
+  transition: background-color 0.3s ease;
 }
 
 .container {
@@ -20,14 +21,15 @@
 }
 
 .statCard {
-  background: white;
+  background: var(--bg-card);
   padding: 24px;
   border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  color: var(--text-dark);
 }
 
 .iconBg {
-  background: #f0f0f0;
+  background: var(--bg-secondary);
   width: 40px;
   height: 40px;
   border-radius: 12px;
@@ -35,6 +37,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 12px;
+  color: var(--text-dark);
 }
 
 .statCard h3 {
@@ -53,7 +56,7 @@
 }
 
 .chatSection {
-  background: white;
+  background: var(--bg-card);
   border-radius: 24px;
   display: flex;
   flex-direction: column;
@@ -63,13 +66,14 @@
 
 .chatHeader {
   padding: 24px;
-  border-bottom: 1px solid #eee;
-  background: #fafafa;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-header);
 }
 
 .chatHeader h2 {
   font-size: 1.2rem;
   margin-bottom: 4px;
+  color: var(--text-dark);
 }
 
 .chatHeader p {
@@ -95,30 +99,34 @@
 }
 
 .messageAI {
-  background: #f7f7f7;
+  background: var(--bg-secondary);
+  color: var(--text-dark);
   align-self: flex-start;
   border-bottom-left-radius: 4px;
 }
 
 .messageUser {
   background: var(--text-dark);
-  color: white;
+  color: var(--bg-main); /* Inverted text */
   align-self: flex-end;
   border-bottom-right-radius: 4px;
 }
 
 .inputArea {
   padding: 20px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--border-color);
   display: flex;
   gap: 12px;
+  background: var(--bg-card);
 }
 
 .inputArea input {
   flex: 1;
   padding: 14px 20px;
   border-radius: 50px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
+  background: var(--bg-input);
+  color: var(--text-dark);
   outline: none;
   font-size: 1rem;
 }
@@ -158,43 +166,14 @@
 
   .sidebar {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 15px;
   }
 
   .chatSection {
     height: 60vh;
   }
-}
-
-@media (max-width: 600px) {
-  .sidebar {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Add these to the end of src/app/ai/style.module.css */
-
-@media (max-width: 900px) {
-  .page {
-    padding: 20px;
-  }
-
-  .container {
-    grid-template-columns: 1fr; /* Sidebar stacks on top of chat */
-    height: auto; /* Allow content to dictate height */
-  }
-
-  .sidebar {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 15px;
-  }
-
-  .chatSection {
-    height: 60vh; /* Fixed height for chat on mobile */
-  }
-
+  
   .messageAI, .messageUser {
     max-width: 90%;
   }
@@ -202,6 +181,6 @@
 
 @media (max-width: 480px) {
   .sidebar {
-    grid-template-columns: 1fr; /* Single column stats on very small phones */
+    grid-template-columns: 1fr;
   }
 }
