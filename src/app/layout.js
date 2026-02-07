@@ -5,8 +5,8 @@ import { Inter } from 'next/font/google'; // Professional default font
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'EstateAI',
-  description: 'AI-powered real estate',
+  title: 'Toovi',
+  description: 'AI-agent that turns real estate into deal driven market',
 };
 
 export default function RootLayout({ children }) {
