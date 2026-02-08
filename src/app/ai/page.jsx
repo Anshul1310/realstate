@@ -28,13 +28,13 @@ export default function AIPage() {
         {/* Chat Interface */}
         <section className={styles.chatSection}>
           <div className={styles.chatHeader}>
-            <h2>AI Real Estate Advisor</h2>
-            <p>Ask me about investment opportunities, mortgage rates, or local trends.</p>
+            <h2>AI Deal Closer</h2>
+            <p>Ask me about optimized property rates, investment opportunities, mortgage rates, or local insights.</p>
           </div>
 
           <div className={styles.chatWindow}>
             <div className={styles.messageAI}>
-              <p>Hello! I analyze millions of data points. How can I help you today?</p>
+              <p>Hello! I analyze millions of data points on real Estate. How can I help you today?</p>
             </div>
             <div className={styles.messageUser}>
               <p>Is it a good time to buy in Miami?</p>

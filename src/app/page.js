@@ -32,11 +32,11 @@ export default function Home() {
           variants={containerVariants}
         >
           <motion.h1 className={styles.title} variants={itemVariants}>
-            The Future of Real Estate is Here.
+            Find. Market. Match. Close Deals! 
           </motion.h1>
           
           <motion.p className={styles.subtitle} variants={itemVariants}>
-            Buy, sell, and analyze properties with the power of artificial intelligence.
+            Buy, sell, and analyze properties with AI.
           </motion.p>
           
           <motion.div className={styles.cardContainer} variants={containerVariants}>
