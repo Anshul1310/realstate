@@ -4,10 +4,12 @@
   padding: 60px 20px;
   min-height: 90vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 100px;
 }
 
-.splitLayout {
+/* --- Hero Section --- */
+.heroSection {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
@@ -51,7 +53,7 @@
 
 .inputGroup button {
   background: var(--text-dark);
-  color: var(--bg-main); /* Invert text color for button */
+  color: var(--bg-main);
   border: none;
   padding: 0 30px;
   border-radius: 12px;
@@ -117,38 +119,240 @@
   color: var(--text-dark);
 }
 
+/* --- Slider Section --- */
+.sliderSection {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  overflow: hidden;
+  padding: 60px 0;
+  background: var(--bg-secondary);
+}
+
+.sliderHeader {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.sliderHeader h2 {
+  font-size: 2.5rem;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.sliderHeader p {
+  color: var(--text-gray);
+}
+
+.sliderTrack {
+  display: flex;
+  gap: 30px;
+  width: max-content;
+  animation: scroll 40s linear infinite;
+  padding: 0 20px;
+}
+
+.sliderCard {
+  width: 300px;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sliderCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+}
+
+.sliderCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.sliderCard:hover img {
+  transform: scale(1.05);
+}
+
+.cardOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.cardInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4px;
+}
+
+.cardPrice {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.cardLoc {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.cardType {
+  font-size: 0.75rem;
+  background: rgba(255,255,255,0.2);
+  padding: 2px 8px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* --- AI Section --- */
+.aiSection {
+  width: 100%;
+  background: var(--bg-card);
+  padding: 60px;
+  border-radius: 30px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+}
+
+.aiHeader {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.aiHeader h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: var(--text-dark);
+}
+
+.aiContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+}
+
+.aiForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fieldGroup label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.fieldGroup input, .fieldGroup select {
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-input);
+  font-size: 1rem;
+}
+
+.analyzeBtn {
+  margin-top: 10px;
+  padding: 16px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.analyzeBtn:hover {
+  opacity: 0.9;
+}
+
+.aiResult {
+  background: var(--bg-secondary);
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 400px;
+  position: relative;
+  overflow: hidden;
+}
+
+.placeholderResult {
+  color: var(--text-gray);
+}
+
+.resultContent h3 {
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+}
+
+.aiBadge {
+  background: var(--text-dark);
+  color: var(--bg-main);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.resultText {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+}
+
 /* Responsive Adjustments */
-@media (max-width: 768px) {
-  .container {
-    padding: 40px 20px;
-  }
-
-  .splitLayout {
+@media (max-width: 900px) {
+  .heroSection, .aiContent {
     grid-template-columns: 1fr;
-    gap: 40px;
   }
-
-  .left {
-    text-align: center;
+  
+  .sliderSection {
+    padding: 30px 0;
   }
-
-  .left h1 {
-    font-size: 2.2rem;
-  }
-
-  .inputGroup {
-    flex-direction: column;
-  }
-
-  .inputGroup button {
-    padding: 16px;
-  }
-
-  .feat {
-    justify-content: center;
-  }
-
-  .mockPrice {
-    font-size: 2.5rem;
+  
+  .aiSection {
+    padding: 30px;
   }
 }

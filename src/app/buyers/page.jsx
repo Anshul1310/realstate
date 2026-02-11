@@ -37,9 +37,30 @@ const Buyers = () => {
     lease_term_years: ''
   });
 
+  const [topProperties, setTopProperties] = useState([]);
   const [recommendation, setRecommendation] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // Mapping for commercial types (API returns number, Form uses string)
+  const COMMERCIAL_TYPES = ['office', 'retail_shop', 'showroom', 'warehouse'];
+
+  // Fetch Top 10 Properties on Mount
+  useEffect(() => {
+    const fetchTopProperties = async () => {
+      try {
+        const response = await fetch('https://project-wokd.onrender.com/properties/top10');
+        if (!response.ok) throw new Error('Failed to load top properties');
+        const data = await response.json();
+        setTopProperties(data);
+      } catch (err) {
+        console.error("Error fetching top properties:", err);
+        // Fallback or empty state could be handled here
+      }
+    };
+
+    fetchTopProperties();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,13 +70,33 @@ const Buyers = () => {
     }));
   };
 
+  // Handle clicking a property card from the slider
+  const handlePropertyClick = (property) => {
+    // Map the API data to the form structure
+    setFormData({
+      property_id: property.property_id || '',
+      city: property.city || '',
+      // data.commercial_type is likely an index (0,1,2,3). We map it to the string value.
+      commercial_type: COMMERCIAL_TYPES[property.commercial_type] || 'office', 
+      size_sqm: property.size_sqm || '',
+      annual_rent: property.annual_rent || '',
+      occupancy_status: property.occupancy_status || '',
+      lease_term_years: property.lease_term_years || ''
+    });
+
+    // Optional: Scroll to form to show user the data is ready
+    const formElement = document.getElementById('propertyForm');
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setRecommendation(null);
     setError(null);
 
-    // Prepare payload with correct types (floats for numbers)
     const payload = {
       property_id: formData.property_id,
       city: formData.city,
@@ -81,16 +122,12 @@ const Buyers = () => {
 
       const data = await response.json();
 
-      // Construct recommendation object from API response
-      // Assuming API returns an explanation/recommendation string or object
-      // We map it to our UI structure
       setRecommendation({
-        ...formData, // Keep original details
-        // If API returns a specific 'recommendation_text' or similar, use it. 
-        // Otherwise stringify the whole data or use a default success message.
+        ...formData,
         aiReasoning: data.recommendation || data.message || JSON.stringify(data), 
-        matchScore: data.score ? Math.round(data.score * 100) : 95, // Example fallback
+        matchScore: data.score ? Math.round(data.score * 100) : 95,
         name: `AI Analyzed: ${formData.commercial_type} in ${formData.city}`,
+        // Use a generic image since the API might not return one for the recommendation object
         imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
       });
 
@@ -105,6 +142,7 @@ const Buyers = () => {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        {/* 1. Hero Header */}
         <motion.header 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -114,6 +152,57 @@ const Buyers = () => {
           <p>Enter property details below to get a real-time AI analysis.</p>
         </motion.header>
 
+        {/* 2. Horizontal Property Slider (Fetched from API) */}
+        <section className={styles.sliderSection}>
+          <div className={styles.sliderHeader}>
+            <h2>Trending Commercial Opportunities</h2>
+            <p>Top 10 properties curated by our algorithm. Click to analyze.</p>
+          </div>
+          
+          <div className={styles.sliderTrack}>
+            {/* We duplicate the list to create an infinite scroll effect.
+               If topProperties is empty, this won't render anything, which is fine.
+            */}
+            {[...topProperties, ...topProperties].map((prop, idx) => {
+              // Generate a stable random image based on index/id since API doesn't provide one
+              const randomImgId = (idx % 5) + 1; 
+              const imgUrl = `https://source.unsplash.com/collection/190727/800x600?sig=${idx}`;
+              // Or use specific fallbacks if source.unsplash is unreliable:
+              const fallbackImages = [
+                'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
+                'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80',
+                'https://images.unsplash.com/photo-1577705998148-6bd4f549e1e7?auto=format&fit=crop&w=600&q=80',
+                'https://images.unsplash.com/photo-1481437156560-3205f6a55735?auto=format&fit=crop&w=600&q=80',
+                'https://images.unsplash.com/photo-1582037928769-1d8f28c257b6?auto=format&fit=crop&w=600&q=80'
+              ];
+              const displayImg = fallbackImages[idx % fallbackImages.length];
+
+              return (
+                <div 
+                  className={styles.sliderCard} 
+                  key={`${prop.property_id}-${idx}`}
+                  onClick={() => handlePropertyClick(prop)}
+                >
+                  <img src={displayImg} alt="Property" />
+                  <div className={styles.cardOverlay}>
+                    <div className={styles.cardInfo}>
+                      <span className={styles.cardPrice}>
+                        {/* Format Rent nicely */}
+                        ₹{(prop.annual_rent / 100000).toFixed(1)} L
+                      </span>
+                      <span className={styles.cardLoc}>{prop.city}</span>
+                    </div>
+                    <span className={styles.cardType}>
+                      {COMMERCIAL_TYPES[prop.commercial_type] || 'Property'}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* 3. Main Content: Form & AI Results */}
         <div className={styles.contentContainer}>
           {/* Form Section */}
           <motion.section 
@@ -121,6 +210,7 @@ const Buyers = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
+            id="propertyForm" // ID for scrolling
           >
             <h2>Property Criteria</h2>
             <form className={styles.form} onSubmit={handleSubmit}>
@@ -266,7 +356,7 @@ const Buyers = () => {
                   <div className={styles.placeholderIcon}>✨</div>
                   <h3>AI Analysis Ready</h3>
                   <p>
-                    Submit property details to receive a comprehensive AI-generated recommendation report.
+                    Submit property details manually or click a trending property above to get started.
                   </p>
                 </motion.div>
               )}
@@ -279,14 +369,13 @@ const Buyers = () => {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ type: "spring", duration: 0.6 }}
                 >
-                  
+                  <img src={recommendation.imageUrl} alt="Property" className={styles.recImage} />
                   
                   <div className={styles.recContent}>
                     <div className={styles.recHeader}>
                       <h3>{recommendation.name}</h3>
                       <div className={styles.aiNote}>
                         <strong>AI Verdict: </strong>
-                        {/* Typewriter Effect Applied Here */}
                         <TypewriterEffect text={recommendation.aiReasoning} />
                       </div>
                     </div>
